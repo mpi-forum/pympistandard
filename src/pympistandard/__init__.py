@@ -45,11 +45,8 @@ from .f08 import (
 )
 
 
-# NOTE provide itertors all_1_0, all_3_1, etc...
-
-
 @export
-def use_api_version(version: Union[int, str] = "LATEST", given_path: str = None) -> None:
+def use_api_version(version: Union[int, str] = "LATEST", given_path: Union[str, Path] = None) -> None:
     """Sets the Python API interface which the user expects to use."""
 
     # clean from possible prior usage
@@ -113,28 +110,36 @@ def _register_kinds_v1() -> None:
             KINDS[key.lower()] = item
 
 
-def _resolve_path(given_path: str = None) -> Path:
+def _resolve_path(given_path: Union[str, Path] = None) -> Path:
     """Find correct path to load apis.json from."""
 
-    path = Path("apis.json")
+    # convert str path to Path
+    if isinstance(given_path, str):
+        given_path = Path(given_path)
 
+    # use given path
     if given_path is not None:
-        path = Path(given_path + "/apis.json").resolve()
+        path = given_path / "apis.json"
 
+    # use environment variable paths
     elif "MPISTANDARD" in os.environ:
-        path = Path(os.environ["MPISTANDARD"] + "/apis.json").resolve()
-        print(path)
+        path = Path(os.environ["MPISTANDARD"] + "/apis.json")
 
-    # TODO with separation from mpi_standard directory this would not be valid anymore, so remove it.
-    elif path.exists():
-        # load directly
-        pass
+    elif "MPI_STANDARD" in os.environ:
+        path = Path(os.environ["MPI_STANDARD"] + "/apis.json")
+
+    # use current working directory
+    elif (Path.cwd() / "apis.json").exists():
+        path = Path.cwd() / "apis.json"
 
     else:
         raise RuntimeError(
             "Could not find apis.json, either use MPISTANDARD environment variable"
             "or execute pympistandard from root of MPI Standard direction."
         )
+
+    # require resolved path to exist
+    path.resolve(True)
 
     return path
 
