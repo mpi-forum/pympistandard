@@ -145,8 +145,23 @@ def _load_database_v1(path: Path) -> None:
     """
 
     with path.open("r") as datafile:
-        dataset = json.load(datafile)
+        if path.suffix == ".json":
+            dataset = json.load(datafile)
 
+        elif path.suffix == ".yaml":
+            try:
+                import yaml
+
+                dataset = yaml.load(datafile)
+
+            except Exception as error:
+                print("yaml may not be installed")
+                raise error
+
+        else:
+            raise RuntimeError(f"Unrecognized suffix of data file {path}")
+
+        # read in datafile
         for name, desc in dataset.items():
             if desc["attributes"]["predefined_function"]:
                 predef = PredefinedFunction(name, desc)
