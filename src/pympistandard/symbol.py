@@ -14,9 +14,9 @@ class Symbol:
     access to the name and expressibility of the Symbol.
     """
 
-    def __init__(self, name: str, apis: Mapping) -> None:
+    def __init__(self, name: str, parseset: Mapping) -> None:
         self._name = name
-        self._parseset = apis
+        self._parseset = parseset
 
     @property
     def name(self) -> str:
