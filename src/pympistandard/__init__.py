@@ -17,7 +17,7 @@ import logging
 import os
 
 
-from .storage import KINDS, PROCEDURES, CALLBACKS, PREDEFINED_FUNCTIONS
+from .storage import KINDS, PROCEDURES, CALLBACKS, PREDEFINED_FUNCTIONS, clear_storage
 from .parameter import Direction
 from .procedure import Procedure
 from .callback import Callback
@@ -46,12 +46,18 @@ from .f08 import (
 
 
 @export
+def unload() -> None:
+    """Unloads currently loaded Python API Interface and MPI Standard."""
+
+    clear_storage()
+
+
+# TODO rename to load(api_version, mpi_version, path)
+@export
 def use_api_version(version: Union[int, str] = "LATEST", given_path: Union[str, Path] = None) -> None:
     """Sets the Python API interface which the user expects to use."""
 
-    # clean from possible prior usage
-    KINDS.clear()
-    PROCEDURES.clear()
+    unload()
 
     # load version of API
     if version in (1, "LATEST"):

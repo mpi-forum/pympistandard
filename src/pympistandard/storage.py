@@ -20,3 +20,10 @@ PREDEFINED_FUNCTIONS = NamespaceDict()
 CONSTANTS = NamespaceDict()
 # to support this the Python DSL in the MPI Standard needs to be extended
 # and all the constants need to be encoded (name, type, value if given)
+
+def clear_storage():
+    KINDS.clear()
+    PROCEDURES.clear()
+    CALLBACKS.clear()
+    PREDEFINED_FUNCTIONS.clear()
+    CONSTANTS.clear()
