@@ -42,7 +42,7 @@ class KindExpression:
     def lis(self) -> Optional[str]:
         """Express the kind in the LIS form."""
 
-        return self._kind.lis
+        return self._kind._lis
 
     @property
     def iso_c(self) -> Optional[str]:
@@ -50,20 +50,20 @@ class KindExpression:
 
         if self._properties["embiggen"]:
             if self._kind.has_embiggenment():
-                return self._kind.iso_c_large
+                return self._kind._iso_c_large
 
             return None
 
-        return self._kind.iso_c_small
+        return self._kind._iso_c_small
 
     @property
     def f08(self) -> Optional[str]:
         """Express the Kind in the Fortran 2008 form."""
 
         if self._properties["embiggen"]:
-            return self._kind.f08_large
+            return self._kind._f08_large
 
-        return self._kind.f08_small
+        return self._kind._f08_small
 
     @property
     def f90(self) -> Optional[str]:
@@ -72,7 +72,7 @@ class KindExpression:
         if self._properties["embiggen"]:
             return None
 
-        return self._kind.f90_small
+        return self._kind._f90_small
 
 
 class KindExpressions(KindExpression):
@@ -92,11 +92,11 @@ class Kind:
 
     name: str
 
-    lis: Optional[str] = None
+    _lis: Optional[str] = None
 
-    iso_c_small: Optional[str] = None
-    f90_small: Optional[str] = None
-    f08_small: Optional[str] = None
+    _iso_c_small: Optional[str] = None
+    _f90_small: Optional[str] = None
+    _f08_small: Optional[str] = None
 
     def has_embiggenment(self) -> bool:
         """Gets whether the Kind has an embiggenment form."""
@@ -140,8 +140,8 @@ class PolyKind(Kind):
     individually hold its expressions in each language and size form.
     """
 
-    iso_c_large: Optional[str] = None
-    f08_large: Optional[str] = None
+    _iso_c_large: Optional[str] = None
+    _f08_large: Optional[str] = None
 
     def has_embiggenment(self) -> bool:
         return True
@@ -156,4 +156,4 @@ class CPTRKind(Kind):
     In which cases there is another expression aside from the original MPI_ADDRESS_KIND.
     """
 
-    f90_cptr: Optional[str] = None
+    _f90_cptr: Optional[str] = None
