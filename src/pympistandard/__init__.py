@@ -4,7 +4,7 @@ below this level should be considered private.
 """
 
 
-__all__ = ["PROCEDURES", "KINDS", "CALLBACKS", "PREDEFINED_FUNCTIONS"]
+__all__ = ["PROCEDURES", "KINDS", "CALLBACKS", "PREDEFINED_FUNCTIONS", "CONSTANTS"]
 __author__ = "Martin Ruefenacht"
 __version__ = "0.1"
 
