@@ -2,12 +2,10 @@
 """
 
 
-from typing import Mapping
+from typing import Mapping, Optional
 
 
-class ConstantExpression:
-    def __init__(self, parseset) -> None:
-        self._parseset = parseset
+from .storage import KINDS
 
 
 class Constant:
@@ -27,7 +25,26 @@ class Constant:
         return self._name
 
     @property
-    def express(self) -> ConstantExpression:
-        """Get expressions of this Constant."""
+    def kind(self) -> "Kind":
+        """Get the Kind of the constant."""
 
-        return ConstantExpression(self._parseset)
+        return KINDS[self._parseset["constant_kind"]]
+
+    @property
+    def is_opaque(self) -> bool:
+        return "value" not in self._parseset and "queryable" not in self._parseset
+
+    @property
+    def value(self) -> Optional[str]:
+        if "value" not in self._parseset:
+            return None
+
+        else:
+            # TODO deal with equal_to
+            # TODO deal with atleast
+            raise NotImplementedError("atleast or equal_to not yet implemented")
+
+    @property
+    def queryable(self) -> None:
+        # TODO ...
+        raise NotImplementedError("queryable not implemented")

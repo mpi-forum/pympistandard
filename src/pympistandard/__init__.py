@@ -22,10 +22,18 @@ import sys
 MPI_DATABASE_FILE: str = "apis.json"
 
 
-from .storage import KINDS, PROCEDURES, CALLBACKS, PREDEFINED_FUNCTIONS, clear_storage
+from .storage import (
+    KINDS,
+    PROCEDURES,
+    CALLBACKS,
+    PREDEFINED_FUNCTIONS,
+    CONSTANTS,
+    clear_storage,
+)
 from .parameter import Direction
 from .procedure import Procedure
 from .callback import Callback
+from .constant import Constant
 from .predefined_function import PredefinedFunction
 from .kind import Kind, PolyKind
 from . import _kinds
@@ -180,6 +188,13 @@ def _load_database_v1(path: Path) -> None:
     """
     Find and register all procedures found in the 'apis.json' file with Procedure instances.
     """
+
+    # TODO discover which files of our database are in path, apis.json, constants.json
+
+    with path.joinpath("constants.json").open() as constants_file:
+        for name, desc in dataset.items():
+            const = Constant(name, desc)
+            CONSTANTS[const.name] = const
 
     with path.open("r") as datafile:
         if path.suffix == ".json":
