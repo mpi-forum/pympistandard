@@ -79,7 +79,7 @@ class LISParameter:
 
         kind = KINDS[self._parseset["kind"]]
 
-        return None if kind.lis is None else kind
+        return None if kind.express.lis is None else kind
 
     @property
     def type(self) -> str:
@@ -88,7 +88,10 @@ class LISParameter:
         if self.kind is None or self.kind.express.lis is None:
             return ""
 
-        if "lis_paren" in self._parseset["suppress"] or "lis_kind" in self._parseset["suppress"]:
+        if (
+            "lis_paren" in self._parseset["suppress"]
+            or "lis_kind" in self._parseset["suppress"]
+        ):
             return ""
 
         if self.kind in (KINDS.STRING, KINDS.STRING_2DARRAY):
