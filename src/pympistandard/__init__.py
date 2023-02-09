@@ -10,6 +10,7 @@ __version__ = "0.1"
 
 
 from pathlib import Path
+import importlib.resources
 import json
 from enum import Enum
 from typing import Union, Tuple
@@ -54,7 +55,9 @@ def unload() -> None:
 
 # TODO rename to load(api_version, mpi_version, path)
 @export
-def use_api_version(version: Union[int, str] = "LATEST", given_path: Union[str, Path] = None) -> None:
+def use_api_version(
+    version: Union[int, str] = "LATEST", given_path: Union[str, Path] = None
+) -> None:
     """Sets the Python API interface which the user expects to use."""
 
     unload()
@@ -75,7 +78,9 @@ def all_lis_procedures() -> Tuple[Procedure]:
     """Fetch all LIS expressible procedures available in the Standard."""
 
     return tuple(
-        procedure for procedure in PROCEDURES.values() if procedure.express.lis is not None
+        procedure
+        for procedure in PROCEDURES.values()
+        if procedure.express.lis is not None
     )
 
 
@@ -84,7 +89,9 @@ def all_iso_c_procedures() -> Tuple[Procedure]:
     """Fetch all ISO C expressible procedures available in the Standard."""
 
     return tuple(
-        procedure for procedure in PROCEDURES.values() if procedure.express.iso_c is not None
+        procedure
+        for procedure in PROCEDURES.values()
+        if procedure.express.iso_c is not None
     )
 
 
@@ -93,7 +100,9 @@ def all_f08_procedures() -> Tuple[Procedure]:
     """Fetch all F08 expressible procedures available in the Standard."""
 
     return tuple(
-        procedure for procedure in PROCEDURES.values() if procedure.express.f08 is not None
+        procedure
+        for procedure in PROCEDURES.values()
+        if procedure.express.f08 is not None
     )
 
 
@@ -102,7 +111,9 @@ def all_f90_procedures() -> Tuple[Procedure]:
     """Fetch all F90 expressible procedures available in the Standard."""
 
     return tuple(
-        procedure for procedure in PROCEDURES.values() if procedure.express.f90 is not None
+        procedure
+        for procedure in PROCEDURES.values()
+        if procedure.express.f90 is not None
     )
 
 
@@ -131,18 +142,15 @@ def _resolve_path(given_path: Union[str, Path] = None) -> Path:
     elif "MPISTANDARD" in os.environ:
         path = Path(os.environ["MPISTANDARD"] + "/apis.json")
 
-    elif "MPI_STANDARD" in os.environ:
-        path = Path(os.environ["MPI_STANDARD"] + "/apis.json")
-
-    # use current working directory
-    elif (Path.cwd() / "apis.json").exists():
-        path = Path.cwd() / "apis.json"
+    # else:
+    #     raise RuntimeError(
+    #         "Could not find apis.json, either use MPISTANDARD environment variable"
+    #         "or execute pympistandard from root of MPI Standard direction."
+    #     )
 
     else:
-        raise RuntimeError(
-            "Could not find apis.json, either use MPISTANDARD environment variable"
-            "or execute pympistandard from root of MPI Standard direction."
-        )
+        # fallback to packaged data
+        path = importlib.resources.files("pympistandard.data").joinpath("apis.json")
 
     # require resolved path to exist
     path.resolve(True)
