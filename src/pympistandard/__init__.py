@@ -191,11 +191,6 @@ def _load_database_v1(path: Path) -> None:
 
     # TODO discover which files of our database are in path, apis.json, constants.json
 
-    with path.joinpath("constants.json").open() as constants_file:
-        for name, desc in dataset.items():
-            const = Constant(name, desc)
-            CONSTANTS[const.name] = const
-
     with path.open("r") as datafile:
         if path.suffix == ".json":
             dataset = json.load(datafile)
@@ -214,7 +209,7 @@ def _load_database_v1(path: Path) -> None:
             raise RuntimeError(f"Unrecognized suffix of data file {path}")
 
         # read in datafile
-        for name, desc in dataset.items():
+        for name, desc in dataset["procedures"].items():
             if desc["attributes"]["predefined_function"]:
                 predef = PredefinedFunction(name, desc)
                 PREDEFINED_FUNCTIONS[predef.name] = predef
@@ -226,3 +221,7 @@ def _load_database_v1(path: Path) -> None:
             else:
                 procedure = Procedure(name, desc)
                 PROCEDURES[procedure.name] = procedure
+
+        for name, desc in dataset["constants"].items():
+            const = Constant(name, desc)
+            CONSTANTS[name] = const

@@ -7,10 +7,10 @@ The Kind represents a cross language internal to MPI type.
 
 from dataclasses import dataclass
 from collections import defaultdict
-from typing import Optional, MutableMapping, TYPE_CHECKING
+from typing import Optional, MutableMapping, TYPE_CHECKING, List
 
 
-from .storage import CALLBACKS
+from .storage import CALLBACKS, CONSTANTS
 
 
 if TYPE_CHECKING:
@@ -106,7 +106,7 @@ class Kind:
         return False
 
     @property
-    def callback(self) -> Optional['Callback']:
+    def callback(self) -> Optional["Callback"]:
         """Access the relevant Callback object for this Kind."""
 
         # NOTE this should eventually be non-optional, all FUNCTION KINDs will have a Callback
@@ -125,6 +125,12 @@ class Kind:
             return CALLBACKS["MPI_T_" + self.name]
 
         return None
+
+    @property
+    def constants(self) -> List:
+        """Access all constants with this KIND."""
+
+        return [const for const in CONSTANTS.values() if const.kind == self]
 
     @property
     def express(self) -> KindExpressions:
