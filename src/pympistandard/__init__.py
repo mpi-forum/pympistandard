@@ -19,7 +19,7 @@ import os
 import sys
 
 
-MPI_DATABASE_FILE: str = "apis.json"
+MPI_DATABASE_FILE: str = "mpidb.json"
 
 
 from .storage import (
