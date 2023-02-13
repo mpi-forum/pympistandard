@@ -16,6 +16,10 @@ from enum import Enum
 from typing import Union, Tuple, Optional
 import logging
 import os
+import sys
+
+
+MPI_DATABASE_FILE: str = "apis.json"
 
 
 from .storage import KINDS, PROCEDURES, CALLBACKS, PREDEFINED_FUNCTIONS, clear_storage
@@ -129,14 +133,26 @@ def _register_kinds_v1() -> None:
             KINDS[key.lower()] = item
 
 
+def _load_bundled_db():
+    if sys.version_info.major == 3 and sys.version_info.minor < 9:
+        with importlib.resources.path(
+            "pympistandard.data", MPI_DATABASE_FILE
+        ) as datapath:
+            return datapath
+
+    else:
+        return importlib.resources.files("pympistandard.data").joinpath(
+            MPI_DATABASE_FILE
+        )
+
+
 def _resolve_path(
     given_path: Optional[Union[str, Path]] = None, force_bundled: bool = False
 ) -> Path:
     """Find correct path to load apis.json from."""
 
     if force_bundled:
-        with importlib.resources.path("pympistandard.data", "apis.json") as datapath:
-            path = datapath
+        path = _load_bundled_db()
 
     # convert str path to Path
     elif isinstance(given_path, str):
@@ -144,23 +160,15 @@ def _resolve_path(
 
     # use given path
     elif isinstance(given_path, Path):
-        path = given_path / "apis.json"
+        path = given_path / MPI_DATABASE_FILE
 
     # use environment variable paths
     elif "MPISTANDARD" in os.environ:
-        path = Path(os.environ["MPISTANDARD"] + "/apis.json")
-
-    # else:
-    #     raise RuntimeError(
-    #         "Could not find apis.json, either use MPISTANDARD environment variable"
-    #         "or execute pympistandard from root of MPI Standard direction."
-    #     )
+        path = Path(os.environ["MPISTANDARD"] + "/" + MPI_DATABASE_FILE)
 
     else:
         # fallback to packaged data
-        # AFTER 3.9 path = importlib.resources.files("pympistandard.data").joinpath("apis.json")
-        with importlib.resources.path("pympistandard.data", "apis.json") as datapath:
-            path = datapath
+        path = _load_bundled_db()
 
     # require resolved path to exist
     path.resolve(True)
