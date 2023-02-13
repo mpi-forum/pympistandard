@@ -78,7 +78,7 @@ def use_api_version(
 
     # load version of API
     if version in (1, "LATEST"):
-        _register_kinds_v1()
+        # _register_kinds_v1()
 
         path = _resolve_path(given_path, force_bundled)
         _load_database_v1(path)
@@ -184,6 +184,24 @@ def _resolve_path(
     return path
 
 
+def _load_kind_v1(kind) -> Kind:
+    if kind["kind_name"].startswith("POLY"):
+        return PolyKind(
+            kind["kind_name"],
+            kind["lis"],
+            kind["c_small"],
+            kind["f90"],
+            kind["f08_small"],
+            kind["c_large"],
+            kind["f08_large"],
+        )
+
+    else:
+        return Kind(
+            kind["kind_name"], kind["lis"], kind["c_small"], kind["f90"], kind["f08_small"]
+        )
+
+
 def _load_database_v1(path: Path) -> None:
     """
     Find and register all procedures found in the 'apis.json' file with Procedure instances.
@@ -209,9 +227,8 @@ def _load_database_v1(path: Path) -> None:
             raise RuntimeError(f"Unrecognized suffix of data file {path}")
 
         # read in all kinds
-        for name, desc in dataset["kinds"].items:
-            kind = Kind(name, desc)
-            KINDS[name] = kind
+        for name, desc in dataset["kinds"].items():
+            KINDS[name] = _load_kind_v1(desc)
 
         # read in all procedures, callbacks, predefined_functions
         for name, desc in dataset["procedures"].items():
