@@ -2,10 +2,14 @@
 """
 
 
-from typing import Mapping, Optional
+from typing import Mapping, Optional, Tuple, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .kind import Kind
 
 
 from .storage import KINDS
+from .version import Version
 
 
 class Constant:
@@ -48,3 +52,22 @@ class Constant:
     def queryable(self) -> None:
         # TODO ...
         raise NotImplementedError("queryable not implemented")
+
+    @property
+    def introduced(self) -> Version:
+        # TODO
+        raise NotImplementedError("Versions are not yet annotated in the Standard")
+
+    @property
+    def deprecated(self) -> Optional[Version]:
+        # TODO
+        # None is not deprecated
+        # otherwise version
+
+        raise NotImplementedError("constants don't have deprecation annotated")
+
+    @property
+    def removed(self) -> Optional[Version]:
+        # TODO
+        # None is not removed, otherwise version
+        raise NotImplementedError("constants don't have removal annotated")
