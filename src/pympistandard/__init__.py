@@ -13,7 +13,7 @@ from pathlib import Path
 import importlib.resources
 import json
 from enum import Enum
-from typing import Union, Tuple
+from typing import Union, Tuple, Optional
 import logging
 import os
 
@@ -56,7 +56,9 @@ def unload() -> None:
 # TODO rename to load(api_version, mpi_version, path)
 @export
 def use_api_version(
-    version: Union[int, str] = "LATEST", given_path: Union[str, Path] = None
+    version: Union[int, str] = "LATEST",
+    given_path: Optional[Union[str, Path]] = None,
+    force_bundled: bool = False,
 ) -> None:
     """Sets the Python API interface which the user expects to use."""
 
@@ -66,7 +68,7 @@ def use_api_version(
     if version in (1, "LATEST"):
         _register_kinds_v1()
 
-        path = _resolve_path(given_path)
+        path = _resolve_path(given_path, force_bundled)
         _load_database_v1(path)
 
     else:
@@ -127,15 +129,21 @@ def _register_kinds_v1() -> None:
             KINDS[key.lower()] = item
 
 
-def _resolve_path(given_path: Union[str, Path] = None) -> Path:
+def _resolve_path(
+    given_path: Optional[Union[str, Path]] = None, force_bundled: bool = False
+) -> Path:
     """Find correct path to load apis.json from."""
 
+    if force_bundled:
+        with importlib.resources.path("pympistandard.data", "apis.json") as datapath:
+            path = datapath
+
     # convert str path to Path
-    if isinstance(given_path, str):
+    elif isinstance(given_path, str):
         given_path = Path(given_path)
 
     # use given path
-    if given_path is not None:
+    elif isinstance(given_path, Path):
         path = given_path / "apis.json"
 
     # use environment variable paths
