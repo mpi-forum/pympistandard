@@ -131,14 +131,14 @@ def all_f90_procedures() -> Tuple[Procedure]:
     )
 
 
-def _register_kinds_v1() -> None:
-    """
-    Register all Kind instances found in the _kinds.py file in the KINDS variable.
-    """
-
-    for key, item in _kinds.__dict__.items():
-        if isinstance(item, Kind):
-            KINDS[key.lower()] = item
+# def _register_kinds_v1() -> None:
+#     """
+#     Register all Kind instances found in the _kinds.py file in the KINDS variable.
+#     """
+#
+#     for key, item in _kinds.__dict__.items():
+#         if isinstance(item, Kind):
+#             KINDS[key.lower()] = item
 
 
 def _load_bundled_db():
@@ -208,7 +208,12 @@ def _load_database_v1(path: Path) -> None:
         else:
             raise RuntimeError(f"Unrecognized suffix of data file {path}")
 
-        # read in datafile
+        # read in all kinds
+        for name, desc in dataset["kinds"].items:
+            kind = Kind(name, desc)
+            KINDS[name] = kind
+
+        # read in all procedures, callbacks, predefined_functions
         for name, desc in dataset["procedures"].items():
             if desc["attributes"]["predefined_function"]:
                 predef = PredefinedFunction(name, desc)
@@ -222,6 +227,7 @@ def _load_database_v1(path: Path) -> None:
                 procedure = Procedure(name, desc)
                 PROCEDURES[procedure.name] = procedure
 
+        # read in all constants
         for name, desc in dataset["constants"].items():
             const = Constant(name, desc)
             CONSTANTS[name] = const
