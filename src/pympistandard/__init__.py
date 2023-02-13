@@ -150,7 +150,9 @@ def _resolve_path(given_path: Union[str, Path] = None) -> Path:
 
     else:
         # fallback to packaged data
-        path = importlib.resources.files("pympistandard.data").joinpath("apis.json")
+        # AFTER 3.9 path = importlib.resources.files("pympistandard.data").joinpath("apis.json")
+        with importlib.resources.path("pympistandard.data", "apis.json") as datapath:
+            path = datapath
 
     # require resolved path to exist
     path.resolve(True)
