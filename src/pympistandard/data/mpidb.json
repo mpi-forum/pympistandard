@@ -36,6 +36,15 @@
         }
     },
     "kinds": {
+        "ARRAY_LENGTH_PI": {
+            "c_large": null,
+            "c_small": "int",
+            "f08_large": null,
+            "f08_small": "INTEGER",
+            "f90": "INTEGER",
+            "kind_name": "ARRAY_LENGTH_PI",
+            "lis": "positive integer"
+        },
         "BUFFER": {
             "c_large": null,
             "c_small": "void",
@@ -63,6 +72,15 @@
             "kind_name": "DATATYPE",
             "lis": "handle"
         },
+        "ERROR_CODE": {
+            "c_large": null,
+            "c_small": "int",
+            "f08_large": null,
+            "f08_small": "INTEGER",
+            "f90": "INTEGER",
+            "kind_name": "ERROR_CODE",
+            "lis": "integer"
+        },
         "POLYXFER_NUM_ELEM_NNI": {
             "c_large": "MPI_Count",
             "c_small": "int",
@@ -89,6 +107,15 @@
             "f90": "INTEGER",
             "kind_name": "TAG",
             "lis": "integer"
+        },
+        "VARARGS": {
+            "c_large": null,
+            "c_small": "\\ldots",
+            "f08_large": null,
+            "f08_small": null,
+            "f90": null,
+            "kind_name": "VARARGS",
+            "lis": "\\ldots"
         }
     },
     "procedures": {

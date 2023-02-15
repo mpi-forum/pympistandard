@@ -228,7 +228,7 @@ def _load_database_v1(path: Path) -> None:
 
         # read in all kinds
         for name, desc in dataset["kinds"].items():
-            KINDS[name] = _load_kind_v1(desc)
+            KINDS[name.lower()] = _load_kind_v1(desc)
 
         # read in all procedures, callbacks, predefined_functions
         for name, desc in dataset["procedures"].items():
