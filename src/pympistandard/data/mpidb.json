@@ -63,6 +63,15 @@
             "kind_name": "COMMUNICATOR",
             "lis": "handle"
         },
+        "COMM_SIZE": {
+            "c_large": null,
+            "c_small": "int",
+            "f08_large": null,
+            "f08_small": "INTEGER",
+            "f90": "INTEGER",
+            "kind_name": "COMM_SIZE",
+            "lis": "integer"
+        },
         "DATATYPE": {
             "c_large": null,
             "c_small": "MPI_Datatype",
@@ -79,6 +88,24 @@
             "f08_small": "INTEGER",
             "f90": "INTEGER",
             "kind_name": "ERROR_CODE",
+            "lis": "integer"
+        },
+        "INFO": {
+            "c_large": null,
+            "c_small": "MPI_Info",
+            "f08_large": null,
+            "f08_small": "TYPE(MPI_Info)",
+            "f90": "INTEGER",
+            "kind_name": "INFO",
+            "lis": "handle"
+        },
+        "POLYDISPLACEMENT": {
+            "c_large": "MPI_Aint",
+            "c_small": "int",
+            "f08_large": "INTEGER(KIND=MPI_ADDRESS_KIND)",
+            "f08_small": "INTEGER",
+            "f90": "INTEGER",
+            "kind_name": "POLYDISPLACEMENT",
             "lis": "integer"
         },
         "POLYXFER_NUM_ELEM_NNI": {
@@ -98,6 +125,33 @@
             "f90": "INTEGER",
             "kind_name": "RANK",
             "lis": "integer"
+        },
+        "REQUEST": {
+            "c_large": null,
+            "c_small": "MPI_Request",
+            "f08_large": null,
+            "f08_small": "TYPE(MPI_Request)",
+            "f90": "INTEGER",
+            "kind_name": "REQUEST",
+            "lis": "handle"
+        },
+        "STRING_2DARRAY": {
+            "c_large": null,
+            "c_small": "char",
+            "f08_large": null,
+            "f08_small": "CHARACTER",
+            "f90": "CHARACTER*(*)",
+            "kind_name": "STRING_2DARRAY",
+            "lis": "array of array of strings"
+        },
+        "STRING_ARRAY": {
+            "c_large": null,
+            "c_small": "char",
+            "f08_large": null,
+            "f08_small": "CHARACTER",
+            "f90": "CHARACTER*(*)",
+            "kind_name": "STRING_ARRAY",
+            "lis": "array of strings"
         },
         "TAG": {
             "c_large": null,
