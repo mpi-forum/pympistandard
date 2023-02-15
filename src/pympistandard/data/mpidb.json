@@ -35,6 +35,62 @@
             "constant_value_atleast": 32767
         }
     },
+    "kinds": {
+        "BUFFER": {
+            "c_large": null,
+            "c_small": "void",
+            "f08_large": null,
+            "f08_small": "TYPE(*), DIMENSION(..)",
+            "f90": "<type>",
+            "kind_name": "BUFFER",
+            "lis": "choice"
+        },
+        "COMMUNICATOR": {
+            "c_large": null,
+            "c_small": "MPI_Comm",
+            "f08_large": null,
+            "f08_small": "TYPE(MPI_Comm)",
+            "f90": "INTEGER",
+            "kind_name": "COMMUNICATOR",
+            "lis": "handle"
+        },
+        "DATATYPE": {
+            "c_large": null,
+            "c_small": "MPI_Datatype",
+            "f08_large": null,
+            "f08_small": "TYPE(MPI_Datatype)",
+            "f90": "INTEGER",
+            "kind_name": "DATATYPE",
+            "lis": "handle"
+        },
+        "POLYXFER_NUM_ELEM_NNI": {
+            "c_large": "MPI_Count",
+            "c_small": "int",
+            "f08_large": "INTEGER(KIND=MPI_COUNT_KIND)",
+            "f08_small": "INTEGER",
+            "f90": "INTEGER",
+            "kind_name": "POLYXFER_NUM_ELEM_NNI",
+            "lis": "non-negative integer"
+        },
+        "RANK": {
+            "c_large": null,
+            "c_small": "int",
+            "f08_large": null,
+            "f08_small": "INTEGER",
+            "f90": "INTEGER",
+            "kind_name": "RANK",
+            "lis": "integer"
+        },
+        "TAG": {
+            "c_large": null,
+            "c_small": "int",
+            "f08_large": null,
+            "f08_small": "INTEGER",
+            "f90": "INTEGER",
+            "kind_name": "TAG",
+            "lis": "integer"
+        }
+    },
     "procedures": {
         "mpi_abort": {
             "attributes": {
