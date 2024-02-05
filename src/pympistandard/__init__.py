@@ -4,7 +4,7 @@ below this level should be considered private.
 """
 
 
-__all__ = ["PROCEDURES", "KINDS", "CALLBACKS", "PREDEFINED_FUNCTIONS"]
+__all__ = ["PROCEDURES", "KINDS", "CALLBACKS", "PREDEFINED_FUNCTIONS", "CONSTANTS"]
 __author__ = "Martin Ruefenacht"
 __version__ = "0.1"
 
@@ -19,13 +19,21 @@ import os
 import sys
 
 
-MPI_DATABASE_FILE: str = "apis.json"
+MPI_DATABASE_FILE: str = "mpidb.json"
 
 
-from .storage import KINDS, PROCEDURES, CALLBACKS, PREDEFINED_FUNCTIONS, clear_storage
+from .storage import (
+    KINDS,
+    PROCEDURES,
+    CALLBACKS,
+    PREDEFINED_FUNCTIONS,
+    CONSTANTS,
+    clear_storage,
+)
 from .parameter import Direction
 from .procedure import Procedure
 from .callback import Callback
+from .constant import Constant
 from .predefined_function import PredefinedFunction
 from .kind import Kind, PolyKind
 from . import _kinds
@@ -70,7 +78,7 @@ def use_api_version(
 
     # load version of API
     if version in (1, "LATEST"):
-        _register_kinds_v1()
+        # _register_kinds_v1()
 
         path = _resolve_path(given_path, force_bundled)
         _load_database_v1(path)
@@ -123,14 +131,14 @@ def all_f90_procedures() -> Tuple[Procedure]:
     )
 
 
-def _register_kinds_v1() -> None:
-    """
-    Register all Kind instances found in the _kinds.py file in the KINDS variable.
-    """
-
-    for key, item in _kinds.__dict__.items():
-        if isinstance(item, Kind):
-            KINDS[key.lower()] = item
+# def _register_kinds_v1() -> None:
+#     """
+#     Register all Kind instances found in the _kinds.py file in the KINDS variable.
+#     """
+#
+#     for key, item in _kinds.__dict__.items():
+#         if isinstance(item, Kind):
+#             KINDS[key.lower()] = item
 
 
 def _load_bundled_db():
@@ -176,10 +184,30 @@ def _resolve_path(
     return path
 
 
+def _load_kind_v1(kind) -> Kind:
+    if kind["kind_name"].startswith("POLY"):
+        return PolyKind(
+            kind["kind_name"],
+            kind["lis"],
+            kind["c_small"],
+            kind["f90"],
+            kind["f08_small"],
+            kind["c_large"],
+            kind["f08_large"],
+        )
+
+    else:
+        return Kind(
+            kind["kind_name"], kind["lis"], kind["c_small"], kind["f90"], kind["f08_small"]
+        )
+
+
 def _load_database_v1(path: Path) -> None:
     """
     Find and register all procedures found in the 'apis.json' file with Procedure instances.
     """
+
+    # TODO discover which files of our database are in path, apis.json, constants.json
 
     with path.open("r") as datafile:
         if path.suffix == ".json":
@@ -198,8 +226,12 @@ def _load_database_v1(path: Path) -> None:
         else:
             raise RuntimeError(f"Unrecognized suffix of data file {path}")
 
-        # read in datafile
-        for name, desc in dataset.items():
+        # read in all kinds
+        for name, desc in dataset["kinds"].items():
+            KINDS[name.lower()] = _load_kind_v1(desc)
+
+        # read in all procedures, callbacks, predefined_functions
+        for name, desc in dataset["procedures"].items():
             if desc["attributes"]["predefined_function"]:
                 predef = PredefinedFunction(name, desc)
                 PREDEFINED_FUNCTIONS[predef.name] = predef
@@ -211,3 +243,8 @@ def _load_database_v1(path: Path) -> None:
             else:
                 procedure = Procedure(name, desc)
                 PROCEDURES[procedure.name] = procedure
+
+        # read in all constants
+        for name, desc in dataset["constants"].items():
+            const = Constant(name, desc)
+            CONSTANTS[name] = const
