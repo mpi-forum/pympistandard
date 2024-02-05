@@ -1,6 +1,6 @@
 [project]
 name = "pympistandard"
-version = "0.1.1"
+version = "0.1.2"
 description = "Python API to the MPI Standard."
 authors = [
     {name = "Martin Ruefenacht", email = "m.a.ruefenacht@gmail.com"},
