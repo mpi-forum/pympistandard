@@ -25,7 +25,7 @@ test = [
 
 [tool.pdm.version]
 source = "file"
-path = "pympistandard/__init__.py"
+path = "src/pympistandard/__init__.py"
 
 [build-system]
 requires = ["pdm-backend"]
