@@ -17,9 +17,10 @@ PROCEDURES: MutableMapping[str, "Procedure"] = NamespaceDict()
 CALLBACKS = NamespaceDict()
 PREDEFINED_FUNCTIONS = NamespaceDict()
 
-CONSTANTS = NamespaceDict()
+CONSTANTS: MutableMapping[str, "Constant"] = NamespaceDict()
 # to support this the Python DSL in the MPI Standard needs to be extended
 # and all the constants need to be encoded (name, type, value if given)
+
 
 def clear_storage():
     KINDS.clear()

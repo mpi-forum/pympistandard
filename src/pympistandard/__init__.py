@@ -4,7 +4,7 @@ below this level should be considered private.
 """
 
 
-__all__ = ["PROCEDURES", "KINDS", "CALLBACKS", "PREDEFINED_FUNCTIONS"]
+__all__ = ["PROCEDURES", "KINDS", "CALLBACKS", "PREDEFINED_FUNCTIONS", "CONSTANTS"]
 __author__ = "Martin Ruefenacht"
 __version__ = "0.1"
 
@@ -19,13 +19,21 @@ import os
 import sys
 
 
-MPI_DATABASE_FILE: str = "apis.json"
+MPI_DATABASE_FILE: str = "mpidb.json"
 
 
-from .storage import KINDS, PROCEDURES, CALLBACKS, PREDEFINED_FUNCTIONS, clear_storage
+from .storage import (
+    KINDS,
+    PROCEDURES,
+    CALLBACKS,
+    PREDEFINED_FUNCTIONS,
+    CONSTANTS,
+    clear_storage,
+)
 from .parameter import Direction
 from .procedure import Procedure
 from .callback import Callback
+from .constant import Constant
 from .predefined_function import PredefinedFunction
 from .kind import Kind, PolyKind
 from . import _kinds
@@ -181,6 +189,8 @@ def _load_database_v1(path: Path) -> None:
     Find and register all procedures found in the 'apis.json' file with Procedure instances.
     """
 
+    # TODO discover which files of our database are in path, apis.json, constants.json
+
     with path.open("r") as datafile:
         if path.suffix == ".json":
             dataset = json.load(datafile)
@@ -199,7 +209,7 @@ def _load_database_v1(path: Path) -> None:
             raise RuntimeError(f"Unrecognized suffix of data file {path}")
 
         # read in datafile
-        for name, desc in dataset.items():
+        for name, desc in dataset["procedures"].items():
             if desc["attributes"]["predefined_function"]:
                 predef = PredefinedFunction(name, desc)
                 PREDEFINED_FUNCTIONS[predef.name] = predef
@@ -211,3 +221,7 @@ def _load_database_v1(path: Path) -> None:
             else:
                 procedure = Procedure(name, desc)
                 PROCEDURES[procedure.name] = procedure
+
+        for name, desc in dataset["constants"].items():
+            const = Constant(name, desc)
+            CONSTANTS[name] = const
