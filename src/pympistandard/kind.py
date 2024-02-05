@@ -4,7 +4,6 @@ This module defines the Kind and PolyKind types.
 The Kind represents a cross language internal to MPI type.
 """
 
-
 from dataclasses import dataclass
 from collections import defaultdict
 from typing import Optional, MutableMapping, TYPE_CHECKING
@@ -106,7 +105,7 @@ class Kind:
         return False
 
     @property
-    def callback(self) -> Optional['Callback']:
+    def callback(self) -> Optional["Callback"]:
         """Access the relevant Callback object for this Kind."""
 
         # NOTE this should eventually be non-optional, all FUNCTION KINDs will have a Callback

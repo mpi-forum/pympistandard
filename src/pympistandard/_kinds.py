@@ -2,7 +2,6 @@
 This module contains all kinds as dataclasses.
 """
 
-
 from .kind import Kind, PolyKind, CPTRKind
 
 BUFFER = Kind(
@@ -23,7 +22,11 @@ C_BUFFER = CPTRKind(
     _f90_cptr="TYPE(C_PTR)",
 )
 C_BUFFER2 = Kind(
-    name="C_BUFFER2", _lis="choice", _iso_c_small="void", _f90_small="<type>", _f08_small="TYPE(C_PTR)"
+    name="C_BUFFER2",
+    _lis="choice",
+    _iso_c_small="void",
+    _f90_small="<type>",
+    _f08_small="TYPE(C_PTR)",
 )
 C_BUFFER3 = Kind(
     name="C_BUFFER3",
@@ -47,7 +50,11 @@ EXTRA_STATE = Kind(
     _f08_small="INTEGER(KIND=MPI_ADDRESS_KIND)",
 )
 EXTRA_STATE2 = Kind(
-    name="EXTRA_STATE2", _lis=None, _iso_c_small="void", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="EXTRA_STATE2",
+    _lis=None,
+    _iso_c_small="void",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 FUNCTION_SMALL = Kind(
     name="FUNCTION_SMALL",
@@ -57,7 +64,11 @@ FUNCTION_SMALL = Kind(
     _f08_small="PROCEDURE",
 )
 FUNCTION = Kind(
-    name="FUNCTION", _lis="function", _iso_c_small=None, _f90_small="EXTERNAL", _f08_small="PROCEDURE"
+    name="FUNCTION",
+    _lis="function",
+    _iso_c_small=None,
+    _f90_small="EXTERNAL",
+    _f08_small="PROCEDURE",
 )
 POLYFUNCTION = PolyKind(
     name="POLYFUNCTION",
@@ -111,13 +122,25 @@ STRING_2DARRAY = Kind(
     _f08_small="CHARACTER",
 )
 ARGUMENT_COUNT = Kind(
-    name="ARGUMENT_COUNT", _lis=None, _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="ARGUMENT_COUNT",
+    _lis=None,
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
 ARGUMENT_LIST = Kind(
-    name="ARGUMENT_LIST", _lis=None, _iso_c_small="char", _f90_small=None, _f08_small=None
+    name="ARGUMENT_LIST",
+    _lis=None,
+    _iso_c_small="char",
+    _f90_small=None,
+    _f08_small=None,
 )
 ARRAY_LENGTH = Kind(
-    name="ARRAY_LENGTH", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="ARRAY_LENGTH",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 ARRAY_LENGTH_NNI = Kind(
     name="ARRAY_LENGTH_NNI",
@@ -134,7 +157,11 @@ ARRAY_LENGTH_PI = Kind(
     _f08_small="INTEGER",
 )
 ATTRIBUTE_VAL_10 = Kind(
-    name="ATTRIBUTE_VAL_10", _lis=None, _iso_c_small="void", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="ATTRIBUTE_VAL_10",
+    _lis=None,
+    _iso_c_small="void",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 ATTRIBUTE_VAL = Kind(
     name="ATTRIBUTE_VAL",
@@ -151,10 +178,18 @@ BLOCKLENGTH = Kind(
     _f08_small="INTEGER",
 )
 COLOR = Kind(
-    name="COLOR", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="COLOR",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 COORDINATE = Kind(
-    name="COORDINATE", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="COORDINATE",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 COORDINATE_NNI = Kind(
     name="COORDINATE_NNI",
@@ -171,9 +206,19 @@ DEGREE = Kind(
     _f08_small="INTEGER",
 )
 DIMENSION = Kind(
-    name="DIMENSION", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="DIMENSION",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
-ENUM = Kind(name="ENUM", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER")
+ENUM = Kind(
+    name="ENUM",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
+)
 FILE_DESCRIPTOR = Kind(
     name="FILE_DESCRIPTOR",
     _lis="integer",
@@ -181,18 +226,40 @@ FILE_DESCRIPTOR = Kind(
     _f90_small="INTEGER",
     _f08_small="INTEGER",
 )
-KEY = Kind(name="KEY", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER")
+KEY = Kind(
+    name="KEY",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
+)
 KEYVAL = Kind(
-    name="KEYVAL", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="KEYVAL",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 INDEX = Kind(
-    name="INDEX", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="INDEX",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 LOGICAL = Kind(
-    name="LOGICAL", _lis="logical", _iso_c_small="int", _f90_small="LOGICAL", _f08_small="LOGICAL"
+    name="LOGICAL",
+    _lis="logical",
+    _iso_c_small="int",
+    _f90_small="LOGICAL",
+    _f08_small="LOGICAL",
 )
 LOGICAL_OPTIONAL = Kind(
-    name="LOGICAL_OPTIONAL", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="LOGICAL_OPTIONAL",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
 LOGICAL_BOOLEAN = Kind(
     name="LOGICAL_BOOLEAN",
@@ -201,11 +268,27 @@ LOGICAL_BOOLEAN = Kind(
     _f90_small="LOGICAL",
     _f08_small="LOGICAL",
 )
-MATH = Kind(name="MATH", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER")
-NUM_DIMS = Kind(
-    name="NUM_DIMS", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+MATH = Kind(
+    name="MATH",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
-RANK = Kind(name="RANK", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER")
+NUM_DIMS = Kind(
+    name="NUM_DIMS",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
+)
+RANK = Kind(
+    name="RANK",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
+)
 RANK_NNI = Kind(
     name="RANK_NNI",
     _lis="non-negative integer",
@@ -214,7 +297,11 @@ RANK_NNI = Kind(
     _f08_small="INTEGER",
 )
 COMM_SIZE = Kind(
-    name="COMM_SIZE", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="COMM_SIZE",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 COMM_SIZE_PI = Kind(
     name="COMM_SIZE_PI",
@@ -224,7 +311,11 @@ COMM_SIZE_PI = Kind(
     _f08_small="INTEGER",
 )
 STRING_LENGTH = Kind(
-    name="STRING_LENGTH", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="STRING_LENGTH",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 STRIDE_BYTES = Kind(
     name="STRIDE_BYTES",
@@ -234,11 +325,25 @@ STRIDE_BYTES = Kind(
     _f08_small="INTEGER(KIND=MPI_ADDRESS_KIND)",
 )
 STRIDE_ELEM = Kind(
-    name="STRIDE_ELEM", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="STRIDE_ELEM",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
-TAG = Kind(name="TAG", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER")
+TAG = Kind(
+    name="TAG",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
+)
 VERSION = Kind(
-    name="VERSION", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="VERSION",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 WEIGHT = Kind(
     name="WEIGHT",
@@ -255,10 +360,18 @@ OFFSET = Kind(
     _f08_small="INTEGER(KIND=MPI_OFFSET_KIND)",
 )
 PROFILE_LEVEL = Kind(
-    name="PROFILE_LEVEL", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="PROFILE_LEVEL",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 ASSERT = Kind(
-    name="ASSERT", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="ASSERT",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 WINDOW_SIZE = Kind(
     name="WINDOW_SIZE",
@@ -275,44 +388,102 @@ INFO_VALUE_LENGTH = Kind(
     _f08_small="INTEGER",
 )
 ACCESS_MODE = Kind(
-    name="ACCESS_MODE", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="ACCESS_MODE",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 KEY_INDEX = Kind(
-    name="KEY_INDEX", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="KEY_INDEX",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 TOOLENUM_INDEX = Kind(
-    name="TOOLENUM_INDEX", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="TOOLENUM_INDEX",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
 TOOLENUM_SIZE = Kind(
-    name="TOOLENUM_SIZE", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="TOOLENUM_SIZE",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
 TOOL_VAR_VERBOSITY = Kind(
-    name="TOOL_VAR_VERBOSITY", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="TOOL_VAR_VERBOSITY",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
 TOOL_VAR_VALUE = Kind(
-    name="TOOL_VAR_VALUE", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="TOOL_VAR_VALUE",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
 CVAR_INDEX = Kind(
-    name="CVAR_INDEX", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="CVAR_INDEX",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
 CVAR_INDEX_SPECIAL = Kind(
-    name="CVAR_INDEX_SPECIAL", _lis="index", _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="CVAR_INDEX_SPECIAL",
+    _lis="index",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
 PVAR_INDEX = Kind(
-    name="PVAR_INDEX", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="PVAR_INDEX",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
 PVAR_CLASS = Kind(
-    name="PVAR_CLASS", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="PVAR_CLASS",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
 SOURCE_INDEX = Kind(
-    name="SOURCE_INDEX", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="SOURCE_INDEX",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
 EVENT_INDEX = Kind(
-    name="EVENT_INDEX", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="EVENT_INDEX",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
-CAT_INDEX = Kind(name="CAT_INDEX", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None)
+CAT_INDEX = Kind(
+    name="CAT_INDEX",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
+)
 UPDATE_NUMBER = Kind(
-    name="UPDATE_NUMBER", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="UPDATE_NUMBER",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
 DROPPED_COUNT = Kind(
     name="DROPPED_COUNT",
@@ -436,7 +607,11 @@ NUM_BYTES_NNI = Kind(
     _f08_small="INTEGER(KIND=MPI_COUNT_KIND)",
 )
 ERROR_CODE = Kind(
-    name="ERROR_CODE", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="ERROR_CODE",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 ERROR_CODE_SHOW_INTENT = Kind(
     name="ERROR_CODE_SHOW_INTENT",
@@ -446,25 +621,61 @@ ERROR_CODE_SHOW_INTENT = Kind(
     _f08_small="INTEGER",
 )
 ERROR_CLASS = Kind(
-    name="ERROR_CLASS", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="ERROR_CLASS",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
-ORDER = Kind(name="ORDER", _lis="state", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER")
+ORDER = Kind(
+    name="ORDER",
+    _lis="state",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
+)
 THREAD_LEVEL = Kind(
-    name="THREAD_LEVEL", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="THREAD_LEVEL",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 COMBINER = Kind(
-    name="COMBINER", _lis="state", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="COMBINER",
+    _lis="state",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 LOCK_TYPE = Kind(
-    name="LOCK_TYPE", _lis="state", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="LOCK_TYPE",
+    _lis="state",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 TOOLS_ENUM = Kind(
-    name="TOOLS_ENUM", _lis="handle", _iso_c_small="MPI_T_enum", _f90_small=None, _f08_small=None
+    name="TOOLS_ENUM",
+    _lis="handle",
+    _iso_c_small="MPI_T_enum",
+    _f90_small=None,
+    _f08_small=None,
 )
 UPDATE_MODE = Kind(
-    name="UPDATE_MODE", _lis="state", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="UPDATE_MODE",
+    _lis="state",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
-BIND_TYPE = Kind(name="BIND_TYPE", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None)
+BIND_TYPE = Kind(
+    name="BIND_TYPE",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
+)
 SOURCE_ORDERING = Kind(
     name="SOURCE_ORDERING",
     _lis="integer",
@@ -480,10 +691,18 @@ CALLBACK_SAFETY = Kind(
     _f08_small=None,
 )
 VARIABLE_SCOPE = Kind(
-    name="VARIABLE_SCOPE", _lis="integer", _iso_c_small="int", _f90_small=None, _f08_small=None
+    name="VARIABLE_SCOPE",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small=None,
+    _f08_small=None,
 )
 TYPECLASS = Kind(
-    name="TYPECLASS", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="TYPECLASS",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 GROUP_COMPARISON = Kind(
     name="GROUP_COMPARISON",
@@ -500,13 +719,25 @@ COMM_COMPARISON = Kind(
     _f08_small="INTEGER",
 )
 SPLIT_TYPE = Kind(
-    name="SPLIT_TYPE", _lis="integer", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="SPLIT_TYPE",
+    _lis="integer",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 TOPOLOGY_TYPE = Kind(
-    name="TOPOLOGY_TYPE", _lis="state", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="TOPOLOGY_TYPE",
+    _lis="state",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 DISTRIB_ENUM = Kind(
-    name="DISTRIB_ENUM", _lis="state", _iso_c_small="int", _f90_small="INTEGER", _f08_small="INTEGER"
+    name="DISTRIB_ENUM",
+    _lis="state",
+    _iso_c_small="int",
+    _f90_small="INTEGER",
+    _f08_small="INTEGER",
 )
 RMA_DISPLACEMENT_SMALL = Kind(
     name="RMA_DISPLACEMENT_SMALL",
@@ -785,7 +1016,11 @@ POLYTOOLS_NUM_ELEM = PolyKind(
     _f08_large="INTEGER(KIND=MPI_COUNT_KIND)",
 )
 TOOLS_TICK_COUNT = Kind(
-    name="TOOLS_TICK_COUNT", _lis="integer", _iso_c_small="MPI_Count", _f90_small=None, _f08_small=None
+    name="TOOLS_TICK_COUNT",
+    _lis="integer",
+    _iso_c_small="MPI_Count",
+    _f90_small=None,
+    _f08_small=None,
 )
 POLYNUM_BYTES = PolyKind(
     name="POLYNUM_BYTES",
@@ -966,10 +1201,18 @@ OPERATION = Kind(
     _f08_small="TYPE(MPI_Op)",
 )
 CVAR = Kind(
-    name="CVAR", _lis="handle", _iso_c_small="MPI_T_cvar_handle", _f90_small=None, _f08_small=None
+    name="CVAR",
+    _lis="handle",
+    _iso_c_small="MPI_T_cvar_handle",
+    _f90_small=None,
+    _f08_small=None,
 )
 PVAR = Kind(
-    name="PVAR", _lis="handle", _iso_c_small="MPI_T_pvar_handle", _f90_small=None, _f08_small=None
+    name="PVAR",
+    _lis="handle",
+    _iso_c_small="MPI_T_pvar_handle",
+    _f90_small=None,
+    _f08_small=None,
 )
 PVAR_SESSION = Kind(
     name="PVAR_SESSION",
@@ -993,7 +1236,11 @@ EVENT_INSTANCE = Kind(
     _f08_small=None,
 )
 TOOL_MPI_OBJ = Kind(
-    name="TOOL_MPI_OBJ", _lis="pointer", _iso_c_small="void", _f90_small=None, _f08_small=None
+    name="TOOL_MPI_OBJ",
+    _lis="pointer",
+    _iso_c_small="void",
+    _f90_small=None,
+    _f08_small=None,
 )
 F90_STATUS = Kind(
     name="F90_STATUS",
@@ -1009,28 +1256,82 @@ F08_STATUS = Kind(
     _f90_small="TYPE(MPI_Status)",
     _f08_small="TYPE(MPI_Status)",
 )
-F90_COMM = Kind(name="F90_COMM", _lis=None, _iso_c_small="MPI_Fint", _f90_small=None, _f08_small=None)
+F90_COMM = Kind(
+    name="F90_COMM",
+    _lis=None,
+    _iso_c_small="MPI_Fint",
+    _f90_small=None,
+    _f08_small=None,
+)
 F90_DATATYPE = Kind(
-    name="F90_DATATYPE", _lis=None, _iso_c_small="MPI_Fint", _f90_small=None, _f08_small=None
+    name="F90_DATATYPE",
+    _lis=None,
+    _iso_c_small="MPI_Fint",
+    _f90_small=None,
+    _f08_small=None,
 )
-F90_GROUP = Kind(name="F90_GROUP", _lis=None, _iso_c_small="MPI_Fint", _f90_small=None, _f08_small=None)
+F90_GROUP = Kind(
+    name="F90_GROUP",
+    _lis=None,
+    _iso_c_small="MPI_Fint",
+    _f90_small=None,
+    _f08_small=None,
+)
 F90_REQUEST = Kind(
-    name="F90_REQUEST", _lis=None, _iso_c_small="MPI_Fint", _f90_small=None, _f08_small=None
+    name="F90_REQUEST",
+    _lis=None,
+    _iso_c_small="MPI_Fint",
+    _f90_small=None,
+    _f08_small=None,
 )
-F90_FILE = Kind(name="F90_FILE", _lis=None, _iso_c_small="MPI_Fint", _f90_small=None, _f08_small=None)
-F90_WIN = Kind(name="F90_WIN", _lis=None, _iso_c_small="MPI_Fint", _f90_small=None, _f08_small=None)
-F90_OP = Kind(name="F90_OP", _lis=None, _iso_c_small="MPI_Fint", _f90_small=None, _f08_small=None)
-F90_INFO = Kind(name="F90_INFO", _lis=None, _iso_c_small="MPI_Fint", _f90_small=None, _f08_small=None)
+F90_FILE = Kind(
+    name="F90_FILE",
+    _lis=None,
+    _iso_c_small="MPI_Fint",
+    _f90_small=None,
+    _f08_small=None,
+)
+F90_WIN = Kind(
+    name="F90_WIN", _lis=None, _iso_c_small="MPI_Fint", _f90_small=None, _f08_small=None
+)
+F90_OP = Kind(
+    name="F90_OP", _lis=None, _iso_c_small="MPI_Fint", _f90_small=None, _f08_small=None
+)
+F90_INFO = Kind(
+    name="F90_INFO",
+    _lis=None,
+    _iso_c_small="MPI_Fint",
+    _f90_small=None,
+    _f08_small=None,
+)
 F90_ERRHANDLER = Kind(
-    name="F90_ERRHANDLER", _lis=None, _iso_c_small="MPI_Fint", _f90_small=None, _f08_small=None
+    name="F90_ERRHANDLER",
+    _lis=None,
+    _iso_c_small="MPI_Fint",
+    _f90_small=None,
+    _f08_small=None,
 )
 F90_MESSAGE = Kind(
-    name="F90_MESSAGE", _lis=None, _iso_c_small="MPI_Fint", _f90_small=None, _f08_small=None
+    name="F90_MESSAGE",
+    _lis=None,
+    _iso_c_small="MPI_Fint",
+    _f90_small=None,
+    _f08_small=None,
 )
 F90_SESSION = Kind(
-    name="F90_SESSION", _lis=None, _iso_c_small="MPI_Fint", _f90_small=None, _f08_small=None
+    name="F90_SESSION",
+    _lis=None,
+    _iso_c_small="MPI_Fint",
+    _f90_small=None,
+    _f08_small=None,
 )
-VARARGS = Kind(name="VARARGS", _lis="\\ldots", _iso_c_small="\\ldots", _f90_small=None, _f08_small=None)
+VARARGS = Kind(
+    name="VARARGS",
+    _lis="\\ldots",
+    _iso_c_small="\\ldots",
+    _f90_small=None,
+    _f08_small=None,
+)
 WALL_TIME = Kind(
     name="WALL_TIME",
     _lis=None,
@@ -1045,4 +1346,6 @@ TICK_RESOLUTION = Kind(
     _f90_small="DOUBLE PRECISION",
     _f08_small="DOUBLE PRECISION",
 )
-NOTHING = Kind(name="NOTHING", _lis=None, _iso_c_small="void", _f90_small=None, _f08_small=None)
+NOTHING = Kind(
+    name="NOTHING", _lis=None, _iso_c_small="void", _f90_small=None, _f08_small=None
+)

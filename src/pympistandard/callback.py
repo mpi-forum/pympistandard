@@ -1,7 +1,6 @@
 """
 """
 
-
 from typing import Mapping, Set
 
 
@@ -19,7 +18,8 @@ class Callback(Symbol):
 
     def has_embiggenment(self) -> bool:
         return any(
-            parameter["kind"].startswith("POLY") for parameter in self._parseset["parameters"]
+            parameter["kind"].startswith("POLY")
+            for parameter in self._parseset["parameters"]
         ) or self._parseset["return_kind"].startswith("POLY")
 
     @property

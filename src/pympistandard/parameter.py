@@ -1,7 +1,6 @@
 """
 """
 
-
 from typing import Mapping
 from enum import Enum
 

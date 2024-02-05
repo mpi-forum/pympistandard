@@ -4,7 +4,6 @@ This module contains the definition of the ISOCProcedure and ISOCParameter.
 Together these are responsible for emitting valid ISO C source code for any Procedure.
 """
 
-
 # pylint: disable=too-few-public-methods
 
 
@@ -68,7 +67,11 @@ class ISOCParameter(Parameter):
     def type(self, pointer_on_name: bool = False) -> str:
         """Get the entire type (derived included, pointers)."""
 
-        return self.base_type + (" " if pointer_on_name else "") + ("*" * self.pointer_level)
+        return (
+            self.base_type
+            + (" " if pointer_on_name else "")
+            + ("*" * self.pointer_level)
+        )
 
     @property
     def pointer_level(self) -> int:
@@ -146,7 +149,10 @@ class ISOCParameter(Parameter):
         ):
             return "[]"
 
-        if self._parseset["kind"] == "STRING_ARRAY" or self._parseset["kind"] == "STRING_2DARRAY":
+        if (
+            self._parseset["kind"] == "STRING_ARRAY"
+            or self._parseset["kind"] == "STRING_2DARRAY"
+        ):
             return "[]"
 
         # As of MPI-4.0, we have array parameters with -- at most -- 2
@@ -232,7 +238,10 @@ class ISOCSymbol:
         """Fetch all parameters of the ISOCProcedure."""
 
         def expressible(parameter: Mapping) -> bool:
-            return "c_parameter" not in parameter["suppress"] and not parameter["large_only"]
+            return (
+                "c_parameter" not in parameter["suppress"]
+                and not parameter["large_only"]
+            )
 
         return tuple(
             ISOCParameter(parameter)
@@ -278,7 +287,9 @@ class EmbiggenedISOCSymbol(ISOCSymbol):
         for parameter in self._parseset["parameters"]:
             if expressible(parameter):
                 if parameter["kind"].startswith("POLY"):
-                    parameters.append(EmbiggenedISOCParameter(parameter, self._embiggening))
+                    parameters.append(
+                        EmbiggenedISOCParameter(parameter, self._embiggening)
+                    )
 
                 else:
                     parameters.append(ISOCParameter(parameter))
@@ -342,7 +353,9 @@ class ISOCPredefinedFunction(ISOCSymbol):
     @property
     def name(self) -> str:
         if self._parseset["name"].upper() != self._parseset["name"]:
-            logging.critical("Lowercase name of predefined function. %s", self._parseset["name"])
+            logging.critical(
+                "Lowercase name of predefined function. %s", self._parseset["name"]
+            )
 
         return f"{self._parseset['name']}".upper()
 
@@ -355,7 +368,9 @@ class EmbiggenedISOCPredefinedFunction(EmbiggenedISOCSymbol):
     @property
     def name(self) -> str:
         if self._parseset["name"].upper() != self._parseset["name"]:
-            logging.critical("Lowercase name of predefined function. %s", self._parseset["name"])
+            logging.critical(
+                "Lowercase name of predefined function. %s", self._parseset["name"]
+            )
 
         return f"{self._parseset['name']}{self._embiggening}".upper()
 

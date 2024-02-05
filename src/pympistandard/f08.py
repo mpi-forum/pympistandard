@@ -1,7 +1,6 @@
 """
 """
 
-
 from typing import Mapping, Tuple, Union, Optional, List
 from collections import defaultdict
 
@@ -67,7 +66,12 @@ class IntentMixin:
         return ", ".join(
             filter(
                 lambda attr: attr is not None,
-                (f"{self.type}{self.type_length}", self.optional, self.intent, self.asynchronous),
+                (
+                    f"{self.type}{self.type_length}",
+                    self.optional,
+                    self.intent,
+                    self.asynchronous,
+                ),
             )
         )
 
@@ -107,7 +111,12 @@ class F08ParameterBase(Parameter):
     def intrinsic(self) -> Optional[str]:
         """ """
 
-        if self.kind in (KINDS.c_buffer, KINDS.c_buffer2, KINDS.c_buffer3, KINDS.c_buffer4):
+        if self.kind in (
+            KINDS.c_buffer,
+            KINDS.c_buffer2,
+            KINDS.c_buffer3,
+            KINDS.c_buffer4,
+        ):
             return r"USE, INTRINSIC\ ::\ ISO_C_BINDING, ONLY : C_PTR \\ "
 
         return None
@@ -314,7 +323,9 @@ class F08Symbol:
             descriptors = []
 
             for descriptor, parameters in self.groupings.items():
-                descriptors.append(descriptor + " :: " + ", ".join(map(str, parameters)))
+                descriptors.append(
+                    descriptor + " :: " + ", ".join(map(str, parameters))
+                )
 
             binding += "\n\t".join(descriptors)
 
@@ -420,13 +431,18 @@ class EmbiggenedF08Symbol(F08Symbol):
         """Get all parameters."""
 
         def expressible(parameter) -> bool:
-            return "f08_parameter" not in parameter["suppress"] and parameter["kind"] != "VARARGS"
+            return (
+                "f08_parameter" not in parameter["suppress"]
+                and parameter["kind"] != "VARARGS"
+            )
 
         parameters: List[Union[F08Parameter, EmbiggenedF08Parameter]] = []
         for parameter in self._parseset["parameters"]:
             if expressible(parameter):
                 if parameter["kind"].startswith("POLY"):
-                    parameters.append(EmbiggenedF08Parameter(parameter, self._embiggening))
+                    parameters.append(
+                        EmbiggenedF08Parameter(parameter, self._embiggening)
+                    )
 
                 else:
                     parameters.append(F08Parameter(parameter))
@@ -497,17 +513,26 @@ class EmbiggenedF08Callback(CallbackMixin, EmbiggenedF08Symbol):
         return self._parseset["name"] + self._embiggening
 
     @property
-    def parameters(self) -> Tuple[Union[F08ParameterCallback, EmbiggenedF08ParameterCallback], ...]:
+    def parameters(
+        self,
+    ) -> Tuple[Union[F08ParameterCallback, EmbiggenedF08ParameterCallback], ...]:
         """ """
 
         def expressible(parameter) -> bool:
-            return "f08_parameter" not in parameter["suppress"] and parameter["kind"] != "VARARGS"
+            return (
+                "f08_parameter" not in parameter["suppress"]
+                and parameter["kind"] != "VARARGS"
+            )
 
-        parameters: List[Union[F08ParameterCallback, EmbiggenedF08ParameterCallback]] = []
+        parameters: List[
+            Union[F08ParameterCallback, EmbiggenedF08ParameterCallback]
+        ] = []
         for parameter in self._parseset["parameters"]:
             if expressible(parameter):
                 if parameter["kind"].startswith("POLY"):
-                    parameters.append(EmbiggenedF08ParameterCallback(parameter, self._embiggening))
+                    parameters.append(
+                        EmbiggenedF08ParameterCallback(parameter, self._embiggening)
+                    )
 
                 else:
                     parameters.append(F08ParameterCallback(parameter))
@@ -578,7 +603,9 @@ class EmbiggenedF08PredefinedFunction(EmbiggenedF08Symbol):
         for parameter in self._parseset["parameters"]:
             if expressible(parameter):
                 if parameter["kind"].startswith("POLY"):
-                    parameters.append(EmbiggenedF08ParameterCallback(parameter, self._embiggening))
+                    parameters.append(
+                        EmbiggenedF08ParameterCallback(parameter, self._embiggening)
+                    )
 
                 else:
                     parameters.append(F08ParameterCallback(parameter))
