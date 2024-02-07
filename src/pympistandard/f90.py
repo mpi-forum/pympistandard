@@ -4,7 +4,6 @@ This module contains the definition of the F90Procedure and F90Parameter.
 Together these are responsible for emitting valid F90 source code for any Procedure.
 """
 
-
 from typing import Mapping, Optional, Tuple, List, Union
 from collections import defaultdict
 
@@ -60,7 +59,12 @@ class F90Parameter(Parameter):
 
         dimensions = list()
 
-        if self._parseset["kind"] in ("BUFFER", "C_BUFFER2", "C_BUFFER3", "STRING_ARRAY"):
+        if self._parseset["kind"] in (
+            "BUFFER",
+            "C_BUFFER2",
+            "C_BUFFER3",
+            "STRING_ARRAY",
+        ):
             # can these be set to length?
             # length is not None for many
             dimensions.append("*")
@@ -133,7 +137,9 @@ class F90Symbol:
 
         # NOTE is there a pattern to when the name_f90 is used?
         return (
-            self._parseset["name_f90"] if self._parseset["name_f90"] else self._parseset["name"]
+            self._parseset["name_f90"]
+            if self._parseset["name_f90"]
+            else self._parseset["name"]
         ).upper()
 
     @property
@@ -184,6 +190,7 @@ class F90Symbol:
 
 class IndexOverloadMixin:
     """"""
+
     # TODO this will disappear after rewrite
     #      we should generate the CPTR expression explicitly
 
@@ -196,6 +203,7 @@ class IndexOverloadMixin:
 
 class NotWithMPIFMixin:
     """"""
+
     # TODO understand what this is for
 
     @property
@@ -243,7 +251,10 @@ class F90Procedure(IndexOverloadMixin, NotWithMPIFMixin, F90Symbol):
 
             for type_name, parameters in self.groupings.items():
                 groups.append(
-                    "\t" + type_name + " " + ", ".join(str(parameter) for parameter in parameters)
+                    "\t"
+                    + type_name
+                    + " "
+                    + ", ".join(str(parameter) for parameter in parameters)
                 )
 
             binding += "\n".join(groups)
@@ -273,7 +284,10 @@ class CPTRF90Procedure(F90Procedure):
 
             for type_name, parameters in self.groupings.items():
                 groups.append(
-                    "\t" + type_name + " " + ", ".join(str(parameter) for parameter in parameters)
+                    "\t"
+                    + type_name
+                    + " "
+                    + ", ".join(str(parameter) for parameter in parameters)
                 )
 
             binding += "\n".join(groups)
@@ -360,7 +374,10 @@ class F90Callback(F90Symbol):
 
             for type_name, parameters in self.groupings.items():
                 groups.append(
-                    "\t" + type_name + " " + ", ".join(str(parameter) for parameter in parameters)
+                    "\t"
+                    + type_name
+                    + " "
+                    + ", ".join(str(parameter) for parameter in parameters)
                 )
 
             binding += "\n".join(groups)
@@ -394,7 +411,10 @@ class F90PredefinedFunction(IndexOverloadMixin, NotWithMPIFMixin, F90Symbol):
 
             for type_name, parameters in self.groupings.items():
                 groups.append(
-                    "\t" + type_name + " " + ", ".join(str(parameter) for parameter in parameters)
+                    "\t"
+                    + type_name
+                    + " "
+                    + ", ".join(str(parameter) for parameter in parameters)
                 )
 
             binding += "\n".join(groups)

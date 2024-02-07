@@ -2,3 +2,4 @@
 **/make.bat
 **/_build
 .pdm-python
+**/dist

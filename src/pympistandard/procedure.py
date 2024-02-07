@@ -1,7 +1,6 @@
 """
 """
 
-
 from .symbol import Symbol
 
 
@@ -26,7 +25,8 @@ class Procedure(Symbol):
         #      it is a RTTI which python already has
 
         return any(
-            parameter["kind"].startswith("POLY") for parameter in self._parseset["parameters"]
+            parameter["kind"].startswith("POLY")
+            for parameter in self._parseset["parameters"]
         ) or self._parseset["return_kind"].startswith("POLY")
 
 

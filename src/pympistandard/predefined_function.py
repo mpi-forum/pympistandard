@@ -19,7 +19,8 @@ class PredefinedFunction(Symbol):
         """"""
 
         return any(
-            parameter["kind"].startswith("POLY") for parameter in self._parseset["parameters"]
+            parameter["kind"].startswith("POLY")
+            for parameter in self._parseset["parameters"]
         ) or self._parseset["return_kind"].startswith("POLY")
 
     @property
@@ -27,4 +28,3 @@ class PredefinedFunction(Symbol):
         """Access the Callback object which this PredefinedFunction implements."""
 
         return CALLBACKS[self._parseset["attributes"]["predefined_function"]]
-

@@ -2,7 +2,6 @@
 This module implements the Namespace class.
 """
 
-
 from typing import Any, Union
 from collections import UserDict
 

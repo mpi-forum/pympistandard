@@ -2,7 +2,6 @@
 This module contains the Expressions class.
 """
 
-
 # pylint: disable=wildcard-import, undefined-variable
 
 
@@ -80,7 +79,9 @@ class Expression:
          - .cptr.profile
         """
 
-        return ".".join(sorted(name for name, existance in self._properties.items() if existance))
+        return ".".join(
+            sorted(name for name, existance in self._properties.items() if existance)
+        )
 
     #    def __getitem__(self, url: str) -> Optional[Union[LISSymbol, ISOCSymbol, F08Symbol, F90Symbol]]:
     #        """Allow bracket access to the expressions."""
@@ -92,7 +93,9 @@ class Expression:
 
         return tuple(
             expr
-            for expr in (self._express_url(url, urls) for url in urls if self._symbol in url)
+            for expr in (
+                self._express_url(url, urls) for url in urls if self._symbol in url
+            )
             if expr is not None
         )
 
@@ -120,7 +123,8 @@ class Expression:
         # is there a better way to query this?
 
         return any(
-            parameter["kind"].startswith("POLY") for parameter in self._parseset["parameters"]
+            parameter["kind"].startswith("POLY")
+            for parameter in self._parseset["parameters"]
         )
 
     def _has_cptr(self) -> bool:
@@ -141,7 +145,9 @@ class Expression:
         if not self._parseset["attributes"][lang_map[language] + "_expressible"]:
             return None
 
-        url = ".".join(filter(lambda com: bool(com), (self._symbol, str(self), language)))
+        url = ".".join(
+            filter(lambda com: bool(com), (self._symbol, str(self), language))
+        )
 
         return self._express_url(url, compositions)
 
