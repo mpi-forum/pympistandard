@@ -61,6 +61,7 @@ def unload() -> None:
 def use_api_version(
     version: Union[int, str] = "LATEST",
     given_path: Optional[Union[str, Path]] = None,
+    experimental: Optional[Union[str, Path, List[str], List[Path]] = None, 
     force_bundled: bool = False,
 ) -> None:
     """Sets the Python API interface which the user expects to use."""
@@ -73,6 +74,7 @@ def use_api_version(
 
         path = _resolve_path(given_path, force_bundled)
         _load_database_v1(path)
+        _load_experimental_v1(path)
 
     else:
         raise RuntimeError("Valid versions of Python API are [1, LATEST].")
