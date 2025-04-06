@@ -155,7 +155,7 @@ def _resolve_path(
 
     # convert str path to Path
     elif isinstance(given_path, str):
-        given_path = Path(given_path)
+        path = Path(given_path)
 
     # use given path
     elif isinstance(given_path, Path):
