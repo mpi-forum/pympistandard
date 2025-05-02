@@ -177,7 +177,7 @@ class EmbiggenedISOCParameter(ISOCParameter):
         self._embiggening = embiggening
 
     @property
-    def type(self) -> str:
+    def base_type(self) -> str:
         """Get the type of the parameter in C."""
 
         if self._parseset["kind"] in ("FUNCTION", "FUNCTION_SMALL"):
