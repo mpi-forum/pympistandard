@@ -37,3 +37,16 @@ embiggened = [proc.name for proc in std.PROCEDURES.values() if proc.has_embiggen
 print(f"Embiggened procedures in 4.1: {len(embiggened)}")
 # 154
 ```
+
+---
+
+This module will run with core Python 3.7.  If you are using an older
+version of Python, you can install additional PyPi packages to support
+the requirements of this module.  This has been tested with Python
+3.6:
+
+```
+virtualenv -m venv
+source venv/bin/activate
+pip install dataclasses importlib_resources
+```
