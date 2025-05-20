@@ -9,7 +9,13 @@ __version__ = "0.1.2"
 
 
 from pathlib import Path
-import importlib.resources
+try:
+    # importlib.resources became part of core Python in 3.7
+    import importlib.resources
+except ImportError:
+    # A backport named importlib_resources is available in PyPi for
+    # older versions of Python.
+    import importlib_resources
 import json
 from enum import Enum
 from typing import Union, Tuple, Optional
