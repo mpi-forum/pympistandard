@@ -268,6 +268,13 @@ LOGICAL_BOOLEAN = Kind(
     _f90_small="LOGICAL",
     _f08_small="LOGICAL",
 )
+LOGICAL_VOID = Kind(
+    name="LOGICAL_VOID",
+    _lis="logical",
+    _iso_c_small="void",
+    _f90_small="LOGICAL",
+    _f08_small="LOGICAL",
+)
 MATH = Kind(
     name="MATH",
     _lis="integer",
