@@ -201,8 +201,14 @@ class ProfilingMixin:
     @property
     def name(self) -> str:
         """Fetch the PMPI naming."""
+        # TODO is there a better way to print out the embiggened version of the
+        # profiling function?
+        if hasattr(self, "_embiggening"):
+            suffix = self._embiggening
+        else:
+            suffix = ""
 
-        return f"P{self._parseset['name']}"
+        return f"P{self._parseset['name']}{suffix}"
 
 
 class ISOCSymbol:
