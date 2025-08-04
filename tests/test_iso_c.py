@@ -35,3 +35,9 @@ This module contains tests related to the ISO C expressions.
 #     """Tests whether the pointer expression of a kind with ISO C is correct."""
 # 
 #     raise NotImplementedError
+
+def test_iso_c_embiggen_profiling(bundled_dataset):
+    mpi_send = bundled_dataset.PROCEDURES.mpi_send
+
+    assert mpi_send.express.embiggen.profile.iso_c.name == "PMPI_Send_c"
+
