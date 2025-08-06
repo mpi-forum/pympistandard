@@ -199,10 +199,10 @@ class ProfilingMixin:
     _parseset: Mapping[str, Any] = {}
 
     @property
-    def name(self) -> str:
-        """Fetch the PMPI naming."""
+    def name_prefix(self) -> str:
+        """Changes prefix to "P" for the profiling interface."""
 
-        return f"P{self._parseset['name']}"
+        return "P"
 
 
 class ISOCSymbol:
@@ -231,7 +231,22 @@ class ISOCSymbol:
     def name(self) -> str:
         """Gives access to the ISO C name."""
 
-        return f"{self._parseset['name']}"
+        return f"{self.name_prefix}{self._parseset['name']}{self.name_suffix}"
+
+    @property
+    def name_prefix(self) -> str:
+        """Gives access to the naming prefix. By default this nothing.
+        TODO in future maybe this should be "MPI_" since that actually makes sense
+        and having MPI_ prepended to everything is ugly.
+        """
+
+        return ""
+
+    @property
+    def name_suffix(self) -> str:
+        """Gives access to the naming suffix. By default this is nothing."""
+
+        return ""
 
     @property
     def parameters(self) -> Tuple[ISOCParameter, ...]:
@@ -271,10 +286,10 @@ class EmbiggenedISOCSymbol(ISOCSymbol):
         self._embiggening = embiggening
 
     @property
-    def name(self) -> str:
-        """Gives access to the ISO C name."""
+    def name_suffix(self) -> str:
+        """Changes suffix to be the embiggening suffix."""
 
-        return f"{self._parseset['name']}{self._embiggening}"
+        return self._embiggening
 
     @property
     def parameters(self) -> Tuple[Union[ISOCParameter, EmbiggenedISOCParameter], ...]:
