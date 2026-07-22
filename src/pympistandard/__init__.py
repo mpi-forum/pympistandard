@@ -11,7 +11,7 @@ __version__ = "0.1.2"
 from pathlib import Path
 try:
     # importlib.resources became part of core Python in 3.7
-    import importlib.resources
+    import importlib.resources as importlib_resources
 except ImportError:
     # A backport named importlib_resources is available in PyPi for
     # older versions of Python.
@@ -140,13 +140,13 @@ def _register_kinds_v1() -> None:
 
 def _load_bundled_db():
     if sys.version_info.major == 3 and sys.version_info.minor < 9:
-        with importlib.resources.path(
+        with importlib_resources.path(
             "pympistandard.data", MPI_DATABASE_FILE
         ) as datapath:
             return datapath
 
     else:
-        return importlib.resources.files("pympistandard.data").joinpath(
+        return importlib_resources.files("pympistandard.data").joinpath(
             MPI_DATABASE_FILE
         )
 
