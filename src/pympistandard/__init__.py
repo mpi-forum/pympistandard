@@ -5,7 +5,7 @@ below this level should be considered private.
 
 __all__ = ["PROCEDURES", "KINDS", "CALLBACKS", "PREDEFINED_FUNCTIONS"]
 __author__ = "Martin Ruefenacht"
-__version__ = "0.1.2"
+__version__ = "0.2.0"
 
 
 from pathlib import Path
